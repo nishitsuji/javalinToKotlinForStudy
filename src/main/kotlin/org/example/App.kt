@@ -3,38 +3,9 @@
  */
 package org.example
 
-//class App {
-//    val greeting: String
-//        get() {
-//            return "Hello world."
-//        }
-//}
-//
-//fun main(args: Array<String>) {
-//    println(App().greeting)
-//}
-//
-
-import org.jooby.Jooby.*
-import org.jooby.Kooby
-
-class App : Kooby({
-    get {
-        val name = param("name").value("Kotlin")
-        "Hello $name!"
-    }
-})
+import io.javalin.Javalin
 
 fun main(args: Array<String>) {
-    run(::App, args)
+    val app = Javalin.create().start(7000)
+    app.get("/") { ctx -> ctx.result("Hello javalin World") }
 }
-
-//import org.jooby.json.Jackson
-//import org.jooby.apitool.ApiTool
-//
-//data class Hello(val hello: String)
-//
-//class App : Kooby({
-//    use(Jackson())
-//    get("/hello/{name}") { Hello(param("name").value()) }
-//})
